@@ -1,0 +1,14 @@
+rules:
+- id: webview
+  patterns:
+    - pattern: |
+        WebView $X = ...;
+        ...
+        $X.loadUrl($INTENT.getStringExtra("url"));
+  metadata:
+    author: Nghia
+  message: |
+    Insecure WebView loading
+  severity: INFO
+  languages:
+  - java

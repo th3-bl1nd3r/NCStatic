@@ -1,0 +1,12 @@
+rules:
+- id: aes_ecb_mode_default
+  languages: 
+  - java
+  severity: ERROR
+  metadata:
+    category: security
+    Author: Nghia
+  message: |
+    Calling Cipher.getInstance("AES") will return AES ECB mode by default.
+  patterns:
+  - pattern: Cipher.getInstance("AES");

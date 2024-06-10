@@ -1,0 +1,22 @@
+rules:
+- id: weak_hash
+  languages: 
+  - java
+  severity: WARNING
+  metadata:
+    category: security
+    Author: Nghia
+  message: |
+    Weak Hash algorithm used.
+  patterns:
+    - pattern-either:
+      - pattern: |
+          $C.getInstance("=~/md5|md4/i", ...);
+      - pattern: |
+          $C.Files.hash(..., Hashing.md5());
+      - pattern: |
+          Files.hash(..., Hashing.md5());
+      - pattern: |
+          DigestUtils.md5Hex(...);
+      - pattern: |
+          DigestUtils.md5(...);

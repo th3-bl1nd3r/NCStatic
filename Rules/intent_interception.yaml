@@ -1,0 +1,76 @@
+rules:
+- id: intent_interception
+  message: |
+    Found potential intent interception due to implicit Intent
+  languages: 
+  - java
+  severity: WARNING
+  metadata:
+    Author: Nghia
+    category: security
+    references: |
+      - https://semgrep.dev
+  pattern-either:
+  - patterns:
+    - pattern: |
+        Intent $INTENT = new Intent("...");
+        ...
+        startActivityForResult($INTENT,...); 
+    - pattern-not: |
+        Intent $INTENT = new Intent(...,$CLASS.class,...);
+        ...
+        startActivityForResult($INTENT,...); 
+  - patterns:
+    - pattern: |
+        Intent $INTENT = new Intent("...");
+        ...
+        startActivity($INTENT,...); 
+    - pattern-not: |
+        Intent $INTENT = new Intent(...,$CLASS.class,...);  
+        ...
+        startActivity($INTENT,...); 
+  - patterns:
+    - pattern: |
+        Intent $INTENT = new Intent("...");
+        ...
+        sendBroadcast($INTENT,...); 
+    - pattern-not: |
+        Intent $INTENT = new Intent(...,$CLASS.class,...);
+        ...
+        sendBroadcast($INTENT,...); 
+  - patterns:
+    - pattern: |
+        Intent $INTENT = new Intent("...");
+        ...
+        $RUNTIME.startActivityForResult($INTENT,...); 
+    - pattern-not: |
+        Intent $INTENT = new Intent(...,$CLASS.class,...);
+        ...
+        $RUNTIME.startActivityForResult($INTENT,...); 
+  - patterns:
+    - pattern: |
+        Intent $INTENT = new Intent("...");
+        ...
+        $RUNTIME.startActivity($INTENT,...); 
+    - pattern-not: |
+        Intent $INTENT = new Intent(...,$CLASS.class,...);
+        ...
+        $RUNTIME.startActivity($INTENT,...); 
+
+
+
+  - patterns:
+    - pattern: |
+        Intent $INTENT = new Intent("...");
+        ...
+        $RUNTIME.sendBroadcast($INTENT,...); 
+    - pattern-not: |
+        Intent $INTENT = new Intent(...,$CLASS.class,...);
+        ...
+        $RUNTIME.sendBroadcast($INTENT,...); 
+  - patterns:
+    - pattern: |
+        startActivity(..., new Intent("..."), ...);
+    - pattern-not: |
+        startActivity(new Intent(...,$CLASS.class,...), ...);
+

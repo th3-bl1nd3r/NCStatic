@@ -1,0 +1,22 @@
+rules:
+- id: insecure_logging
+  languages: 
+  - java
+  severity: WARNING
+  message: |
+     The App logs information.
+  patterns:
+    - pattern-either:
+        - pattern: |
+            $L = ...;
+            ...
+            Log.$D(..., ... + $L, ...);
+        - pattern: |
+            $L = ...;
+            ...
+            Log.$D(..., ... + $L + ..., ...);
+        - pattern: |
+            $L = ...;
+            ...
+            Log.$D(..., $L + ..., ...);
+        
