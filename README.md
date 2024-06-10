@@ -1,6 +1,6 @@
-### NovenStatic
+### NCStatic
 
-Collection of Static Analysis Rules by Noventiq Pentest Team.
+Collection of Static Analysis Rules.
 
 ### Usage
 
