@@ -3,6 +3,12 @@ rules:
   languages: 
   - java
   severity: WARNING
+  metadata:
+    cwe: cwe-532
+    owasp-mobile: m1
+    masvs: storage-3
+    reference: >-
+    https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#logs
   message: |
      The App logs information.
   patterns:

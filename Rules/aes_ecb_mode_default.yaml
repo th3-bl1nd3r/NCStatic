@@ -4,8 +4,12 @@ rules:
   - java
   severity: ERROR
   metadata:
-    category: security
-    Author: Nghia
+    cwe: cwe-327
+    owasp-mobile: m5
+    masvs: crypto-2
+    reference: >-
+      https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#weak-block-cipher-mode
+
   message: |
     Calling Cipher.getInstance("AES") will return AES ECB mode by default.
   patterns:

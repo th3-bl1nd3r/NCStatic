@@ -4,10 +4,11 @@ rules:
   - java
   severity: ERROR
   metadata:
-    category: security
-    references: |
-      - https://owasp.org/www-project-mobile-top-10/2014-risks/m2-insecure-data-storage
-    Author: Nghia
+      cwe: cwe-321
+      owasp-mobile: m5
+      masvs: crypto-1
+      reference: >-
+        https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#common-configuration-issues-mstg-crypto-1-mstg-crypto-2-and-mstg-crypto-3
   message: |
      Hardcoded encryption key makes AES symmetric encryption useless.
   patterns:
