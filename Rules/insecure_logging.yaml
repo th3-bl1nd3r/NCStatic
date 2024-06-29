@@ -2,7 +2,7 @@ rules:
 - id: insecure_logging
   languages: 
   - java
-  severity: WARNING
+  severity: INFO
   metadata:
     cwe: cwe-532
     owasp-mobile: m1
@@ -24,5 +24,11 @@ rules:
         - pattern: |
             $L = ...;
             ...
+            Log.$D(..., $L + ..., ...);
+        - pattern: |
+            Log.$D(..., ... + $L, ...);
+        - pattern: |
+            Log.$D(..., ... + $L + ..., ...);
+        - pattern: |
             Log.$D(..., $L + ..., ...);
         
