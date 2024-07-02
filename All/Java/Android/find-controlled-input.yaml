@@ -1,0 +1,15 @@
+rules:
+- id: find-controlled-input
+  patterns: 
+    - pattern-either:
+        - pattern: getIntent().getExtras().getString($Z); ...
+        - pattern: getIntent().getStringExtra($Z);
+        - pattern: getIntent().getDataString();
+        - pattern: $X.getQueryParameter($Z);
+  metadata:
+      author: Tsu
+  message: |
+      Found potential controlled input $Z
+  severity: INFO
+  languages:
+  - java

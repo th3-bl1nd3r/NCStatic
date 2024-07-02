@@ -1,0 +1,29 @@
+rules:
+- id: detect-intent-spoofing
+  metadata:
+      author: Tsu
+  message: |
+      Detect Intent Spoofing: Intent $INTENT inside method $METHOD
+  pattern-either:
+      - patterns:
+        - pattern: |
+              $METHOD(...){
+                ...
+                Intent $INTENT = getIntent();
+                ...
+                setResult(Activity.RESULT_OK, $INTENT);                
+                ...
+              }
+      - patterns:
+        - pattern: |
+              $METHOD(...){
+                ...
+                Intent $INTENT = getIntent();
+                ...
+                setResult(-1, $INTENT);                
+                ...
+              }
+  severity: WARNING
+  languages:
+  - java
+

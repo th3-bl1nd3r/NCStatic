@@ -1,0 +1,27 @@
+rules:
+- id: detect-intent-interception-1
+  metadata:
+      author: Tsu
+  message: |
+      Detect startActivityForResult($INTENT, $Y) in method $METHOD
+  pattern-either:
+      - pattern: |
+            $METHOD(...){
+              ...
+              Intent $INTENT = new Intent($Y);
+              ...
+              startActivityForResult($INTENT,...);
+              ...
+            }      
+      - pattern: |
+            $METHOD(...){
+              ...
+              Intent $INTENT = new Intent($Y);
+              ...
+              $RUNTIME.startActivityForResult($INTENT,...);
+              ...
+            }
+  severity: ERROR
+  languages:
+  - java
+

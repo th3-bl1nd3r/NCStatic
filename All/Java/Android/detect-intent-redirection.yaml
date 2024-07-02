@@ -1,0 +1,23 @@
+rules:
+- id: detect-intent-redirection
+  patterns: 
+      - pattern: |
+              $METHOD(...){
+                ...
+                Intent $INTENT = getIntent();
+                ...
+                Intent $EXTRA = (Intent)$INTENT.getParcelableExtra(...);
+                ...
+                startActivity($EXTRA);
+                ...
+              }
+      - focus-metavariable: 
+        - $INTENT
+        - $EXTRA
+  metadata:
+      author: Tsu
+  message: |
+      Found potential intent redirection in $METHOD
+  severity: WARNING
+  languages:
+  - java

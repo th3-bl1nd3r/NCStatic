@@ -1,0 +1,15 @@
+rules:
+- id: detect-url
+  metadata:
+      author: Tsu
+  message: |
+      Detect protocol 
+  patterns:
+    - pattern-inside: $METHOD(...){...}
+    - pattern-not-regex: ://localhost.*
+    - pattern-not-regex: https?://.*.android.com.*
+    - pattern-regex: https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)
+  severity: INFO
+  languages:
+  - java
+

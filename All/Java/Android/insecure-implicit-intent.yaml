@@ -1,0 +1,59 @@
+rules:
+- id: insecure-implicit-intent
+  metadata:
+      author: Tsu
+  message: |
+      Implicit intent $Y is being used in activity / service / broadcast.
+  pattern-either:
+      - pattern: |
+            $METHOD(...){
+              ...
+              Intent $INTENT = new Intent($Y);
+              ...
+              sendBroadcast($INTENT);
+              ...
+            }      
+      - pattern: |
+            $METHOD(...){
+              ...
+              Intent $INTENT = new Intent($Y);
+              ...
+              startActivity($INTENT);
+              ...
+            }
+      - pattern: |
+            $METHOD(...){
+              ...
+              Intent $INTENT = new Intent($Y);
+              ...
+              startService($INTENT);
+              ...
+            }
+      - pattern: |
+            $METHOD(...){
+              ...
+              Intent $INTENT = new Intent($Y);
+              ...
+              $RUNTIME.sendBroadcast($INTENT);
+              ...
+            }      
+      - pattern: |
+            $METHOD(...){
+              ...
+              Intent $INTENT = new Intent($Y);
+              ...
+              $RUNTIME.startActivity($INTENT);
+              ...
+            }
+      - pattern: |
+            $METHOD(...){
+              ...
+              Intent $INTENT = new Intent($Y);
+              ...
+              $RUNTIME.startService($INTENT);
+              ...
+            }
+  severity: INFO
+  languages:
+  - java
+
