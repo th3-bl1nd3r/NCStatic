@@ -1,28 +1,31 @@
 rules:
 - id: webview_javascript_enabled
-  metadata:
-      author: Nghia
-  message: |
-      WebView JavaScript enabled
   patterns:
     - pattern: $WEBVIEWSETTINGS.setJavaScriptEnabled(true)
-  severity: WARNING
+  message: |
+      WebView JavaScript enabled
+  metadata:
+    cwe: cwe-749
+    owasp-mobile: m1
+    masvs: platform-7
+    reference: https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#testing-javascript-execution-in-webviews-mstg-platform-5
+  severity: INFO
   languages:
     - java
 
 
 - id: webview_file_access_enabled
-  metadata:
-      cwe: cwe-200
-      owasp-mobile: m1
-      masvs: platform-7
-      reference: >-
-        https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#static-analysis-6
-  message: Enabling file access from URLs in WebView can leak sensitive information from the file system.
   pattern-either:
     - pattern: $WEBVIEWSETTINGS.setAllowFileAccess(true)
     - pattern: $WEBVIEWSETTINGS.setAllowFileAccessFromFileURLs(true)
     - pattern: $WEBVIEWSETTINGS.setAllowUniversalAccessFromFileURLs(true)
+  metadata:
+    cwe: cwe-200
+    owasp-mobile: m1
+    masvs: platform-7
+    reference: >-
+      https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#static-analysis-6
+  message: Enabling file access from URLs in WebView can leak sensitive information from the file system.
   severity: WARNING
   languages:
     - java
