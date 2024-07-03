@@ -7,7 +7,8 @@ Collection of Static Analysis Rules.
 For example, to run against Android Source Code:
 
 ```
-$ semgrep -c ./All/Java/Android /path/to/source/code
+$ jadx -d target_src target.apk
+$ semgrep -c ./NCStatic/Rules /path/to/source/code
 ```
 
 ### Rules
@@ -17,30 +18,11 @@ $ semgrep -c ./All/Java/Android /path/to/source/code
 3. Do not copy and paste other people's rules. Create your own.
 
 ### Structure
-REPO -> All -> LANGUAGE -> Framework(s) and General -> rule.yaml
 
 ```
 .
 └── NCStatic/
-    └── All/
-        ├── Java/
-        │   ├── Android/
-        │   │   ├── rule-1.yaml
-        │   │   └── rule-2.yaml
-        │   ├── dotCMS/
-        │   │   └── rule-a.yaml
-        │   ├── Liferay/
-        │   │   └── rile-b.yaml
-        │   └── General/
-        │       ├── rule-x.yaml
-        │       └── rule-y.yaml
-        ├── PHP/
-        │   ├── Laravel/
-        │   │   └── rule-t.yaml
-        │   └── General/
-        │       └── rule-w.yaml
-        ├── OTHER-LANGUAGE/
-        │   └── General/
-        │       └── rule-f.yaml
-        └── README.md
+    └── Rules/
+        ├── rule-1.yaml
+        └── rule-2.yaml
 ``` 
