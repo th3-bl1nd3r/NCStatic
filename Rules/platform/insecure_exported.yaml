@@ -4,8 +4,6 @@ rules:
     languages:
       - xml
     metadata:
-      authors:
-        - Riccardo Cardelli @gand3lf (IMQ Minded Security)
       owasp-mobile: M1
       category: security
       area: platform
